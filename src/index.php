@@ -32,7 +32,7 @@
 						}
 
 						// Form the SQL query (an INSERT query)
-						$sql="SELECT name, address FROM `restaurants`";
+						$sql="SELECT name, address, rid FROM `restaurants`";
 						$result=mysqli_query($con,$sql);
 						if (!result){
 							echo "Something went wrong when retrieving the results.";
@@ -40,7 +40,7 @@
 						}
 
 						while($row = mysqli_fetch_assoc($result)) {
-							echo "<h3>{$row["name"]}</h3>";
+							echo "<h3><a href=\"http://cs4750.cs.virginia.edu/~rfo8sf/DBMilestone3/restaurant.php?rid={$row["rid"]}\">{$row["name"]}</a></h3>";
 							echo "<p>{$row["address"]}</p>";
 							echo "<p>?/5 rating (0 reviews)</p>";
 						}
