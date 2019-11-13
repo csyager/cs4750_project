@@ -47,6 +47,26 @@
 					?>
 				</div>
 			</section>
+			<div class="content-wrap item-details">
+					<form action="addComment.php" method="post">
+						<section>
+							Rating <br>
+							<input type="radio" name="rating" value="5"> 5 <br>
+							<input type="radio" name="rating" value="4"> 4 <br>
+							<input type="radio" name="rating" value="3"> 3 <br>
+							<input type="radio" name="rating" value="2"> 2 <br>
+							<input type="radio" name="rating" value="1"> 1 <br>
+						</section>
+						<br>
+						<section>
+							Comment<br>
+							<textarea name="comment">Enter comment here</textarea>
+						</section>
+						<br>
+						<input type="Submit">
+						<br>
+					</form>
+				</div>
 			<footer>
 				<div class="content-wrap">
 					<h2>Contact us! (Don't actually)</h2>
