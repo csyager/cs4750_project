@@ -49,10 +49,6 @@
 							Address: <input type="text" name="address">
 						</section>
 						<br>
-						<section>
-							RID: <input type="text" name="rid">
-						</section>
-						<br>
 						<input type="Submit">
 						<br>
 					</form>
