@@ -9,7 +9,7 @@
 	<body>
 		<main>
 			<header>
-			    <div class="content-wrap">
+		    <div class="content-wrap">
 					<div class="black-box">
 						<h1>Good Eats</h1>
 						<h2>Charlottesville Restaurants and Deals</h2>
@@ -34,7 +34,7 @@
 						// Form the SQL query (an INSERT query)
 						$sql="SELECT name, address, rid FROM `restaurants`";
 						$result=mysqli_query($con,$sql);
-						if (!result){
+						if (!$result){
 							echo "Something went wrong when retrieving the results.";
 							die('Error: ' . mysqli_error($con));
 						}

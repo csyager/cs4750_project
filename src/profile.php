@@ -1,3 +1,13 @@
+<?php
+	session_start();
+
+	if( isset( $_SESSION['valid'] ) ) {
+	} else {
+
+		header("Location: authenticate.php");
+	}
+?>
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -18,7 +28,7 @@
           <br>
           <h2>This is your profile page</h2>
 			</header>
-      <h1>Welcome, <?php session_start(); echo $_SESSION['username']; ?></h1>
+      <h1>Welcome, <?php echo $_SESSION['username']; ?></h1>
       <br>
       <a href="logout.php"><button type="submit" style="height: 50px; width: 200px; margin: 10px"><h3>Log out</h3></button></a>
       <br><br>

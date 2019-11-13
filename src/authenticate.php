@@ -1,3 +1,12 @@
+<?php
+	session_start();
+
+	if( isset( $_SESSION['valid'] ) ) {
+		header("Location: profile.php");
+	} else {
+	}
+?>
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -15,7 +24,6 @@
 			<header>
 			    <div class="content-wrap">
 					<div class="black-box">
-
 						<h1>Good Eats</h1>
 						<h2>Charlottesville Restaurants and Deals</h2>
             <form method="POST" action="authenticate.php">
@@ -30,7 +38,6 @@
                 <button type="submit" name="submit">Submit</button>
               </section>
               <?php
-                session_start();
                 include_once("./library.php");// To connect to the database
                 if(isset($_POST['submit'])){
                   //mysqli object and error handling
@@ -47,10 +54,11 @@
                     echo "<section>Incorrect username or password</section>";
                   } else {
                     $_SESSION['username'] = $_POST['username'];
+										$_SESSION['valid'] = true;
                     header("Location: profile.php");
                   }
                 }
-               ?>
+            	?>
             </form>
 					</div>
 
