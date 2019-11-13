@@ -1,11 +1,5 @@
 <?php
 	session_start();
-
-	if( isset( $_SESSION['valid'] ) ) {
-	} else {
-
-		header("Location: authenticate.php");
-	}
 ?>
 
 <html lang="en">
@@ -36,23 +30,25 @@
 						</div>
 					<?php endif; ?>
 				</div>
-				<div class="content-wrap">
+		    <div class="content-wrap">
 					<div class="black-box">
-						<h1>Profile</h1>
-						<h2>Welcome back, <?php echo $_SESSION['username']; ?>!</h2>
+						<h1>Restaurant succesfully submitted</h1>
 					</div>
 				</div>
 			</header>
-			<br><br>
-      <a href="logout.php"><button type="submit" style="height: 50px; width: 200px; margin: 10px"><h3>Log out</h3></button></a>
-      <br><br>
+			<section class="restaurant-listing">
+				<div class="content-wrap item-details">
+					<h2>Your response has been recorded.</h2>
+					<p><a href="/goodeats/">Go back to home page</a></p>
+				</div>
+			</section>
 			<footer>
 				<div class="content-wrap">
 					<h2>Contact us! (Don't actually)</h2>
-			    <ul class="contact-list">
-						<li><a href="mailto:email@example.com">email@example.com</a></li>
-						<li>(434) 123-4567</li>
-					</ul>
+					    <ul class="contact-list">
+							<li><a href="mailto:email@example.com">email@example.com</a></li>
+							<li>(434) 123-4567</li>
+						</ul>
 				</div>
 			</footer>
 		</main>

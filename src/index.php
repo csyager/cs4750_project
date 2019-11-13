@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -9,51 +13,44 @@
 	<body>
 		<main>
 			<header>
+				<div class="navbar">
+					<a href="/goodeats/index.php">Home</a>
+					<?php if (isset($_SESSION['valid'])): ?>
+						<div class="topnav-right">
+							<a href="profile.php">Profile</a>
+							<a href="logout.php">Logout</a>
+						</div>
+					<?php else: ?>
+						<div class="topnav-right">
+							<a href="login.php">Login</a>
+						</div>
+					<?php endif; ?>
+				</div>
 		    <div class="content-wrap">
 					<div class="black-box">
 						<h1>Good Eats</h1>
 						<h2>Charlottesville Restaurants and Deals</h2>
-						<p><a href="http://cs4750.cs.virginia.edu/~shp8xb/goodeats/restaurantform.html">Submit a place</a></p>
-						<p>Submit a review</p>
-						<p><a href="authenticate.php">Log in</a></p>
+						<p>Find new restaurants, great deals, and ratings on restaurants in Charlottesville, Virginia.</p>
 					</div>
 				</div>
 			</header>
-			<section class="restaurant-listing">
-				<div class="content-wrap item-details">
-					<h2>Current Restaurants</h2>
-					<?php
-						include_once("./library.php");// To connect to the database
-						$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-
-						// Check connection
-						if (mysqli_connect_errno()){
-							echo "Failed to connect to MySQL: " . mysqli_connect_error();
-						}
-
-						// Form the SQL query (an INSERT query)
-						$sql="SELECT name, address, rid FROM `restaurants`";
-						$result=mysqli_query($con,$sql);
-						if (!$result){
-							echo "Something went wrong when retrieving the results.";
-							die('Error: ' . mysqli_error($con));
-						}
-
-						while($row = mysqli_fetch_assoc($result)) {
-							echo "<h3><a href=\"http://cs4750.cs.virginia.edu/~rfo8sf/DBProject/restaurant.php?rid={$row["rid"]}\">{$row["name"]}</a></h3>";
-							echo "<p>{$row["address"]}</p>";
-							echo "<p>?/5 rating (0 reviews)</p>";
-						}
-
-						mysqli_close($con);
-					?>
-					<section>
-						<h3>Restaurant 1</h3>
-						<p>720 Address St., Charlottesville, 23940</p>
-						<p>5/5 (720 ratings)</p>
-					</section>
+			<div class="center-items">
+				<div class="menu-box">
+					<h2>
+						<a href="restaurantform.php" style="display:block;height:100%;width:100%">Submit a place</a>
+					</h2>
 				</div>
-			</section>
+				<div class="menu-box">
+					<h2>
+						<a href="restaurants.php" style="display:block;height:100%;width:100%">View Restaurants</a>
+					</h2>
+				</div>
+				<div class="menu-box">
+					<h2>
+						<a href="deals.php" style="display:block;height:100%;width:100%">View Deals</a>
+					</h2>
+				</div>
+			</div>
 			<footer>
 				<div class="content-wrap">
 					<h2>Contact us! (Don't actually)</h2>

@@ -22,11 +22,24 @@
 	<body>
 		<main>
 			<header>
-			    <div class="content-wrap">
+				<div class="navbar">
+					<a href="/goodeats/index.php">Home</a>
+					<?php if (isset($_SESSION['valid'])): ?>
+						<div class="topnav-right">
+							<a href="profile.php">Profile</a>
+							<a href="logout.php">Logout</a>
+						</div>
+					<?php else: ?>
+						<div class="topnav-right">
+							<a href="login.php">Login</a>
+						</div>
+					<?php endif; ?>
+				</div>
+		    <div class="content-wrap">
 					<div class="black-box">
 						<h1>Good Eats</h1>
 						<h2>Charlottesville Restaurants and Deals</h2>
-            <form method="POST" action="authenticate.php">
+            <form method="POST" action="login.php">
   						<section>
   							Username <input type="text" name="username">
   						</section>
@@ -61,7 +74,6 @@
             	?>
             </form>
 					</div>
-
 				</div>
 			</header>
 			<footer>

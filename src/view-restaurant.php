@@ -9,12 +9,23 @@
 	<body>
 		<main>
 			<header>
-			    <div class="content-wrap">
+				<div class="navbar">
+					<a href="/goodeats/index.php">Home</a>
+					<?php if (isset($_SESSION['valid'])): ?>
+						<div class="topnav-right">
+							<a href="profile.php">Profile</a>
+							<a href="logout.php">Logout</a>
+						</div>
+					<?php else: ?>
+						<div class="topnav-right">
+							<a href="login.php">Login</a>
+						</div>
+					<?php endif; ?>
+				</div>
+		    <div class="content-wrap">
 					<div class="black-box">
 						<h1>Good Eats</h1>
 						<h2>Charlottesville Restaurants and Deals</h2>
-						<p><a href="http://cs4750.cs.virginia.edu/~shp8xb/goodeats/restaurantform.html">Submit a place</a></p>
-						<p>Submit a review</p>
 					</div>
 				</div>
 			</header>
@@ -23,26 +34,26 @@
 					<?php
 						include_once("./library.php");// To connect to the database
 						$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-						
+
 						// Check connection
 						if (mysqli_connect_errno()){
 							echo "Failed to connect to MySQL: " . mysqli_connect_error();
 						}
-						
+
 						// Form the SQL query (an INSERT query)
 						$sql="SELECT name, address FROM `restaurants` WHERE rid=" . $_GET["rid"];
 						$result=mysqli_query($con,$sql);
-						if (!result){
+						if (!$result){
 							echo "Something went wrong when retrieving the results.";
 							die('Error: ' . mysqli_error($con));
 						}
-						
+
 						while($row = mysqli_fetch_assoc($result)) {
 							echo "<h2>{$row["name"]}</h2>";
 							echo "<p>{$row["address"]}</p>";
 							echo "<p>?/5 rating (0 reviews)</p>";
 						}
-						
+
 						mysqli_close($con);
 					?>
 				</div>
