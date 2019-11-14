@@ -71,7 +71,7 @@
 						<br>
 						<section>
 							Comment<br>
-							<textarea name="comment">Enter comment here</textarea>
+							<textarea name="comment" rows="4" cols="50" placeholder="Enter comment here"></textarea>
 						</section>
 						<br>
 						<input type="Submit">
