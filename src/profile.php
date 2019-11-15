@@ -24,7 +24,7 @@
 		<main>
 			<header>
 				<div class="navbar">
-					<a href="/goodeats/index.php">Home</a>
+					<a href="index.php">Home</a>
 					<?php if (isset($_SESSION['valid'])): ?>
 						<div class="topnav-right">
 							<a href="profile.php">Profile</a>

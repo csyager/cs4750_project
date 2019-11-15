@@ -7,17 +7,9 @@
 	if (mysqli_connect_errno()){
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	$rid = $_POST['rid'];
-	$rating = $_POST['rating'];
-	$username = $_SESSION['username'];
-	$text = $_POST['text'];
+	$rid = $_GET['rid'];
 
-	$sql = "INSERT INTO `comment` (username, rid, text, rating) VALUES ('$username', '$rid', '$text', '$rating')";
-
-	if (!mysqli_query($con,$sql)){
-		die('Error: ' . mysqli_error($con));
-	}
-	mysqli_close($con);
+	$sql = "INSERT INTO comment('username', 'rid', 'text', 'rating') VALUES ($username, $rid, $text, $rating)";
+	$result=mysqli_query($con,$sql);
 	header("Location: view-restaurant.php?rid=" . $rid);
-
 ?>
