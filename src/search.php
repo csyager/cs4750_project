@@ -34,14 +34,14 @@
 				</div>
 		    <div class="content-wrap">
 					<div class="black-box">
-						<h1>Browse Restaurants</h1>
+						<h1>Search Restaurants</h1>
 						<h2>Find new local places to eat at.</h2>
 					</div>
 				</div>
 			</header>
 			<section class="restaurant-listing">
 				<div class="content-wrap item-details">
-					<h2>Current Restaurants</h2>
+					<h2>Search Restaurants</h2>
 					<table style="width:100%">
 						<tr>
 					    <th>Name</th>
@@ -57,18 +57,26 @@
 								echo "Failed to connect to MySQL: " . mysqli_connect_error();
 							}
 
-							// Form the SQL query (an INSERT query)
-							$sql="SELECT name, address, rid FROM `restaurants`";
-							$result=mysqli_query($con,$sql);
-							if (!$result){
-								echo "Something went wrong when retrieving the results.";
-								die('Error: ' . mysqli_error($con));
-							}
+							if($_GET['search'] != "") {
+								// Form the SQL query (an INSERT query)
+								$sql="SELECT name, address, rid FROM `restaurants` WHERE name LIKE '%" . $_GET['search'] . "%'";
+								$result=mysqli_query($con,$sql);
+								if (!$result){
+									echo "Something went wrong when retrieving the results.";
+									die('Error: ' . mysqli_error($con));
+								}
 
-							while($row = mysqli_fetch_assoc($result)) {
-								echo "<tr><td><h3><a href=\"view-restaurant.php?rid={$row["rid"]}\">{$row["name"]}</a></h3></td>";
-								echo "<td><p>{$row["address"]}</p></td>";
-								echo "<td><p>?/5 rating (0 reviews)</p></td></tr>";
+								$count = 0;
+
+								while($row = mysqli_fetch_assoc($result)) {
+									echo "<tr><td><h3><a href=\"view-restaurant.php?rid={$row["rid"]}\">{$row["name"]}</a></h3></td>";
+									echo "<td><p>{$row["address"]}</p></td>";
+									echo "<td><p>?/5 rating (0 reviews)</p></td></tr>";
+									$count = 1 + $count;
+								}
+								echo "<p>" . $count . " results retrieved.";
+							} else {
+								echo "<p>No restaurants retrieved due to no search query. Please retry again.</p>";
 							}
 
 							mysqli_close($con);

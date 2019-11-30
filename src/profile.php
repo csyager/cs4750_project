@@ -21,10 +21,16 @@
 		</script>
 	</head>
 	<body>
+		<div class="page-container">
+		<div class="footer-wrap">
 		<main>
 			<header>
 				<div class="navbar">
 					<a href="index.php">Home</a>
+					<form action="/goodeats/search.php">
+						<input type="text" placeholder="Search..." name="search">
+						<button type="submit">Submit</button>
+					</form>
 					<?php if (isset($_SESSION['valid'])): ?>
 						<div class="topnav-right">
 							<a href="profile.php">Profile</a>
@@ -46,15 +52,15 @@
 			<br><br>
       <a href="logout.php"><button type="submit" style="height: 50px; width: 200px; margin: 10px"><h3>Log out</h3></button></a>
       <br><br>
-			<footer>
-				<div class="content-wrap">
-					<h2>Contact us! (Don't actually)</h2>
-			    <ul class="contact-list">
-						<li><a href="mailto:email@example.com">email@example.com</a></li>
-						<li>(434) 123-4567</li>
-					</ul>
-				</div>
-			</footer>
 		</main>
+		</div>
+		<footer>
+			<h2>Contact us! (Don't actually)</h2>
+				<ul class="contact-list">
+				<li><a href="mailto:email@example.com">email@example.com</a></li>
+				<li>(434) 123-4567</li>
+				</ul>
+		</footer>
+		</div>
 	</body>
 </html>
