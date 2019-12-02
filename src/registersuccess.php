@@ -38,14 +38,14 @@
 				</div>
 		    <div class="content-wrap">
 					<div class="black-box">
-						<h1>Restaurant succesfully submitted</h1>
+						<h1>Success</h1>
 					</div>
 				</div>
 			</header>
 			<section class="restaurant-listing">
 				<div class="content-wrap item-details">
-					<h2>Your response has been recorded.</h2>
-					<p><a href="/goodeats/index.php">Go back to home page</a></p>
+					<h2>You have successfully resgistered.</h2>
+					<p><a href="index.php">Go back to home page</a></p>
 				</div>
 			</section>
 		</main>

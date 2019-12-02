@@ -20,18 +20,18 @@
 		<main>
 			<header>
 				<div class="navbar">
-					<a href="/goodeats/index.php">Home</a>
-					<form action="/goodeats/search.php">
+					<a href="index.php">Home</a>
+					<form action="search.php">
 						<input type="text" placeholder="Search..." name="search">
 						<button type="submit">Submit</button>
 					</form>
 					<?php if (isset($_SESSION['valid'])): ?>
 						<div class="topnav-right">
-							<a href="profile.php">Profile</a>
 							<a href="logout.php">Logout</a>
 						</div>
 					<?php else: ?>
 						<div class="topnav-right">
+							<a href="register.php">Register</a>
 							<a href="login.php">Login</a>
 						</div>
 					<?php endif; ?>

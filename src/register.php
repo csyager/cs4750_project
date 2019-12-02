@@ -2,7 +2,7 @@
 	session_start();
 
 	if( isset( $_SESSION['valid'] ) ) {
-		header("Location: index.php");
+		header("Location: profile.php");
 	} else {
 	}
 ?>
@@ -43,9 +43,9 @@
 				</div>
 		    <div class="content-wrap">
 					<div class="black-box">
-						<h1>Login</h1>
-						<h2>Welcome back!</h2>
-            <form method="POST" action="login.php">
+						<h1>Register</h1>
+						<h2>Enter your information below to begin.</h2>
+            <form method="POST" action="register.php">
   						<section>
   							Username <input type="text" name="username">
   						</section>
@@ -69,22 +69,18 @@
                   // MySQL query
                   $sql = "SELECT username from users WHERE username = '" . $_POST['username'] . "'";
                   $result = $con->query($sql);
-									$username = $_POST["username"];
-									$password = $_POST["password"];
+									$username = $_POST['username'];
+									$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
                   if ($result-> num_rows == 0){
-                    echo "<section>Incorrect username or password</section>";
-                  } else {
-										while($row = $result->fetch_assoc()) {
-											$db_password = $row['password'];
-											if (password_verify($password, $db_password)) {
-												$_SESSION['username'] = $_POST['username'];
-												$_SESSION['valid'] = true;
-												header("Location: index.php");
-											} else {
-												echo "<section>Incorrect password</section>";
-											}
+										$sql = "INSERT INTO `users` (username, password) VALUES ('$username', '$password')";
+
+										if (!mysqli_query($con,$sql)){
+											die('Error: ' . mysqli_error($con));
 										}
+                    header("Location: registersuccess.php");
+                  } else {
+                    echo "<section>Username already exists. Please choose a unique username.</section>";
                   }
                 }
             	?>
