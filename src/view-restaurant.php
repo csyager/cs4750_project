@@ -52,15 +52,27 @@
 						// Form the SQL query (an INSERT query)
 						$sql="SELECT name, address FROM `restaurants` WHERE rid=" . $_GET["rid"];
 						$result=mysqli_query($con,$sql);
-						if (!$result){
+						$sqlratings="SELECT rating FROM `comment` WHERE rid=" . $_GET["rid"];
+						$resultratings=mysqli_query($con,$sqlratings);
+						$sum = 0;
+						$count = 0;
+
+						if ((!$result) || (!$resultratings)){
 							echo "Something went wrong when retrieving the results.";
 							die('Error: ' . mysqli_error($con));
 						}
 
+						while($row = mysqli_fetch_assoc($resultratings)) {
+							$sum = $sum + intval($row["rating"]);
+							$count = $count + 1;
+						}
+
+						$rating = number_format(($sum / $count),2);
+
 						while($row = mysqli_fetch_assoc($result)) {
 							echo "<h2>{$row["name"]}</h2>";
 							echo "<p>{$row["address"]}</p>";
-							echo "<p>?/5 rating (0 reviews)</p>";
+							echo "<p>{$rating}/5 rating ({$count} reviews)</p>";
 							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
 							// echo "<a href="#"><button class="delete-button" type="delete">Delete</button></a>";
 						}
@@ -87,6 +99,7 @@
 				</div>
 			</section>
 			<div class="content-wrap item-details">
+				<?php if (isset($_SESSION['valid'])): ?>
 					<form action="addComment.php" method="post">
 						<section>
 							Rating <br>
@@ -107,6 +120,9 @@
 						<input type="Submit">
 						<br>
 					</form>
+				<?php else: ?>
+					<p>Please login in order to leave comments.</p>
+				<?php endif; ?>
 				</div>
 			<div class="content-wrap item-details">
 				<?php
