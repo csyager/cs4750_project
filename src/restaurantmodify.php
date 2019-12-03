@@ -38,14 +38,29 @@
 				</div>
 		    <div class="content-wrap">
 					<div class="black-box">
-						<h1>Restaurant succesfully submitted</h1>
+						<h1>Modify a restaurant</h1>
+						<h2>Update the information.</h2>
 					</div>
 				</div>
 			</header>
 			<section class="restaurant-listing">
 				<div class="content-wrap item-details">
-					<h2>Your response has been recorded.</h2>
-					<p><a href="index.php">Go back to home page</a></p>
+				  <h2>Modify a place</h2>
+					<?php
+						echo '<form action="ModifyRestaurant.php?rid=' . $_GET["rid"] . '" method="post">';
+					?>
+					
+						<section>
+							Restaurant name: <input type="text" name="name">
+						</section>
+						<br>
+						<section>
+							Address: <input type="text" name="address">
+						</section>
+						<br>
+						<input type="Submit">
+						<br>
+					</form>
 				</div>
 			</section>
 		</main>

@@ -61,13 +61,11 @@
 							echo "<h2>{$row["name"]}</h2>";
 							echo "<p>{$row["address"]}</p>";
 							echo "<p>?/5 rating (0 reviews)</p>";
+							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
+							// echo "<a href="#"><button class="delete-button" type="delete">Delete</button></a>";
 						}
 
 						mysqli_close($con);
-					?>
-					<?php
-						echo '<a href="#"><button class="modify-button" type="submit">Modify</button></a>'
-						echo '<a href="#"><button class="delete-button" type="delete">Delete</button></a>'
 					?>
 				</div>
 			</section>

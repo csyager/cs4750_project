@@ -46,7 +46,7 @@
 			<section class="restaurant-listing">
 				<div class="content-wrap item-details">
 				  <h2>Submit a place</h2>
-						<form action="InsertRestaurant.php" method="post">
+					<form action="InsertRestaurant.php" method="post">
 						<section>
 							Restaurant name: <input type="text" name="name">
 						</section>
@@ -55,7 +55,7 @@
 							Address: <input type="text" name="address">
 						</section>
 						<br>
-						<input type="Submit">
+							<input type="Submit">
 						<br>
 					</form>
 				</div>
