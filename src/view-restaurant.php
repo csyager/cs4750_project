@@ -72,7 +72,11 @@
 						while($row = mysqli_fetch_assoc($result)) {
 							echo "<h2>{$row["name"]}</h2>";
 							echo "<p>{$row["address"]}</p>";
-							echo "<p>{$rating}/5 rating ({$count} reviews)</p>";
+							if ($count == 0) {
+								echo "<p>No ratings</p>";
+							} else {
+								echo "<p>{$rating}/5.00 rating ({$count} reviews)</p>";
+							}
 							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
 							// echo "<a href="#"><button class="delete-button" type="delete">Delete</button></a>";
 						}
