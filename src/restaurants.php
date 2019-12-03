@@ -48,7 +48,7 @@
 					    <th>Name</th>
 					    <th>Address</th>
 							<th>Ratings</th>
-								<th>Area</th>
+							<th>Area</th>
 					  </tr>
 						<?php
 							include_once("./library.php");// To connect to the database
