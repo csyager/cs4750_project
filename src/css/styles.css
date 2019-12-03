@@ -170,7 +170,7 @@ input[type=password] {
 
 .modify-button {
   padding: 6px;
-  margin-top: 8px;
+  margin: 12px 0px;
   width: 120px;
   height: 50px;
   color: white;
@@ -179,19 +179,6 @@ input[type=password] {
   border: none;
   border-radius: 10px;
   background: #f2cf1f;
-}
-
-.delete-button {
-  padding: 6px;
-  margin-top: 8px;
-  width: 120px;
-  height: 50px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 10px;
-  background: #f21f1f;
 }
 
 /* Bottom Bar background: #2F3061;

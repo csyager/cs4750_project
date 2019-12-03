@@ -76,26 +76,31 @@
 							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
 							// echo "<a href="#"><button class="delete-button" type="delete">Delete</button></a>";
 						}
-						
-						// get list of menu items
-						$sql2="SELECT item_name, description, cost FROM `menuItem` WHERE rid=" . $_GET["rid"];
-						$result2=mysqli_query($con,$sql2);
-						if (!$result2){
-							echo "Something went wrong when retrieving the results.";
-							die('Error: ' . mysqli_error($con));
-						}
-						echo "<table style=\"width:100%\">
-						<tr><th>Item</th>						
-					    <th>Description</th>
-						<th>Cost</th></tr>";
-						while ($row2 = mysqli_fetch_assoc($result2)) {
-							echo "<tr><td><h3>{$row2["item_name"]}</a></h3></td>";
-							echo "<td><p>{$row2["description"]}</p></td>";
-							echo "<td><p>{$row2["cost"]}</p></td></tr>";
-						}
-
-						mysqli_close($con);
 					?>
+
+					<table style=\"width:100%\">
+						<tr>
+							<th>Item</th>
+							<th>Description</th>
+							<th>Cost</th>
+						</tr>
+						<?php
+							// get list of menu items
+							$sql2="SELECT item_name, description, cost FROM `menuItem` WHERE rid=" . $_GET["rid"];
+							$result2=mysqli_query($con,$sql2);
+							if (!$result2){
+								echo "Something went wrong when retrieving the results.";
+								die('Error: ' . mysqli_error($con));
+							}
+							while ($row2 = mysqli_fetch_assoc($result2)) {
+								echo "<tr><td><h3>{$row2["item_name"]}</a></h3></td>";
+								echo "<td><p>{$row2["description"]}</p></td>";
+								echo "<td><p>{$row2["cost"]}</p></td></tr>";
+							}
+
+							mysqli_close($con);
+						?>
+					</table>
 				</div>
 			</section>
 			<div class="content-wrap item-details">
