@@ -7,6 +7,18 @@
 	}
 ?>
 
+<script>
+	function showRID(selected_val) {
+		var elem = document.getElementById('rid_section');
+		if (selected_val == "customer"){
+			elem.style = "display: none";
+		} else {
+			elem.style = "display: block";
+		}
+		
+	}
+</script>
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -51,7 +63,18 @@
   						</section>
   						<section>
   							Password <input type="password" name="password">
-  						</section>
+  						</section><br>
+						<section  style="display: none" id="rid_section">
+							RID <input type="text" name="rid">
+						</section><br>
+						<section>
+							User type <select name="user-type" onchange="showRID(this.options[this.selectedIndex].value);">
+								<option value="customer">Customer</option>
+								<option value="owner">Owner</option>
+							</select>
+						</section>
+						
+
               <br>
               <section>
                 <button type="submit" name="submit">Submit</button>
