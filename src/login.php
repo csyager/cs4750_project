@@ -67,23 +67,26 @@
                     echo "Error: " . $con->connect_error . "\n";
                   }
                   // MySQL query
-                  $sql = "SELECT username from users WHERE username = '" . $_POST['username'] . "'";
+                  $sql = "SELECT username, password from users WHERE username = '" . $_POST['username'] . "'";
                   $result = $con->query($sql);
 									$username = $_POST["username"];
 									$password = $_POST["password"];
-
                   if ($result-> num_rows == 0){
                     echo "<section>Incorrect username or password</section>";
                   } else {
+					  //echo "<section>username found, now checking...</section>";
 										while($row = $result->fetch_assoc()) {
 											$db_password = $row['password'];
-											if (password_verify($password, $db_password)) {
-												$_SESSION['username'] = $_POST['username'];
-												$_SESSION['valid'] = true;
-												header("Location: index.php");
-											} else {
-												echo "<section>Incorrect password</section>";
-											}
+											//echo "<section>entered password: " . $password .  "...</section>";
+											//echo "<section>hashed password: " . $db_password .  "...</section>";
+												if (password_verify($password, $db_password)) {
+													echo "<section>correct password</section>";
+													$_SESSION['username'] = $_POST['username'];
+													$_SESSION['valid'] = true;
+													header("Location: index.php");
+												} else {
+													echo "<section>Incorrect password</section>";
+												}
 										}
                   }
                 }

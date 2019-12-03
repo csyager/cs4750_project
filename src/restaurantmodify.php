@@ -1,11 +1,5 @@
 <?php
 	session_start();
-
-	if( isset( $_SESSION['valid'] ) ) {
-	} else {
-
-		header("Location: authenticate.php");
-	}
 ?>
 
 <html lang="en">
@@ -27,31 +21,48 @@
 			<header>
 				<div class="navbar">
 					<a href="index.php">Home</a>
-					<form action="/goodeats/search.php">
+					<form action="search.php">
 						<input type="text" placeholder="Search..." name="search">
 						<button type="submit">Submit</button>
 					</form>
 					<?php if (isset($_SESSION['valid'])): ?>
 						<div class="topnav-right">
-							<a href="profile.php">Profile</a>
 							<a href="logout.php">Logout</a>
 						</div>
 					<?php else: ?>
 						<div class="topnav-right">
+							<a href="register.php">Register</a>
 							<a href="login.php">Login</a>
 						</div>
 					<?php endif; ?>
 				</div>
-				<div class="content-wrap">
+		    <div class="content-wrap">
 					<div class="black-box">
-						<h1>Profile</h1>
-						<h2>Welcome back, <?php echo $_SESSION['username']; ?>!</h2>
+						<h1>Modify a restaurant</h1>
+						<h2>Update the information.</h2>
 					</div>
 				</div>
 			</header>
-			<br><br>
-      <a href="logout.php"><button type="submit" style="height: 50px; width: 200px; margin: 10px"><h3>Log out</h3></button></a>
-      <br><br>
+			<section class="restaurant-listing">
+				<div class="content-wrap item-details">
+				  <h2>Modify a place</h2>
+					<?php
+						echo '<form action="ModifyRestaurant.php?rid=' . $_GET["rid"] . '" method="post">';
+					?>
+					
+						<section>
+							Restaurant name: <input type="text" name="name">
+						</section>
+						<br>
+						<section>
+							Address: <input type="text" name="address">
+						</section>
+						<br>
+						<input type="Submit">
+						<br>
+					</form>
+				</div>
+			</section>
 		</main>
 		</div>
 		<footer>

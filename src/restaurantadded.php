@@ -45,7 +45,7 @@
 			<section class="restaurant-listing">
 				<div class="content-wrap item-details">
 					<h2>Your response has been recorded.</h2>
-					<p><a href="/goodeats/index.php">Go back to home page</a></p>
+					<p><a href="index.php">Go back to home page</a></p>
 				</div>
 			</section>
 		</main>

@@ -1,5 +1,5 @@
 <?php
-	session_start()
+	session_start();
 ?>
 <html lang="en">
 	<head>
@@ -18,7 +18,7 @@
 					<a href="index.php">Home</a>
 					<form action="search.php">
 						<input type="text" placeholder="Search..." name="search">
-						<button type="submit">Submit</button>
+						<button type="button">Submit</button>
 					</form>
 					<?php if (isset($_SESSION['valid'])): ?>
 						<div class="topnav-right">
@@ -61,6 +61,8 @@
 							echo "<h2>{$row["name"]}</h2>";
 							echo "<p>{$row["address"]}</p>";
 							echo "<p>?/5 rating (0 reviews)</p>";
+							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
+							// echo "<a href="#"><button class="delete-button" type="delete">Delete</button></a>";
 						}
 
 						mysqli_close($con);
