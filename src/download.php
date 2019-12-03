@@ -18,15 +18,17 @@
     }
 
     if($type=='restaurant'){
-        // Form the SQL query (an INSERT query)
+        $filename = 'restaurants.csv';
         $sql="SELECT name, address, rid FROM `restaurants`";
         $result=mysqli_query($con,$sql);
     }
     else if($type=='reg_deal'){
+        $filename = 'regular_deals.csv';
         $sql="SELECT item_name, description, cost, rid, recurs_when FROM `regularDeal`";
         $result=mysqli_query($con,$sql);
     }
     else if($type=='temp_deal'){
+        $filename = 'temporary_deals.csv';
         $sql="SELECT item_name, description, cost, rid, start_date, end_date FROM `tempDiscount`";
         $result=mysqli_query($con,$sql);
     }
@@ -35,10 +37,7 @@
         echo "Something went wrong when retrieving the results.";
         die('Error: ' . mysqli_error($con));
     }
-
-    $filename = 'restaurants.csv';
-    // $export_data = unserialize($_POST['export_data']);
-
+    
     $file = fopen($filename,"w");
 
     while($row = mysqli_fetch_assoc($result)) {

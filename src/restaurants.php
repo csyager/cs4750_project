@@ -42,7 +42,7 @@
 			<section class="restaurant-listing">
 				<div class="content-wrap item-details">
 					<h2>Current Restaurants</h2>
-					<a href="download.php?type=restaurants" target="_blank">Download restaurant data</a>
+					<a href="download.php?type=restaurant" target="_blank">Download restaurant data</a>
 					<table style="width:100%">
 						<tr>
 					    <th>Name</th>
