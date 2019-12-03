@@ -1,5 +1,5 @@
 <?php
-	session_start()
+	session_start();
 ?>
 <html lang="en">
 	<head>
@@ -66,8 +66,8 @@
 						mysqli_close($con);
 					?>
 					<?php
-						echo '<a href="#"><button class="modify-button" type="submit">Modify</button></a>'
-						echo '<a href="#"><button class="delete-button" type="delete">Delete</button></a>'
+						echo '<a href="#"><button class="modify-button" type="submit">Modify</button></a>';
+						echo '<a href="#"><button class="delete-button" type="delete">Delete</button></a>';
 					?>
 				</div>
 			</section>
