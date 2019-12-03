@@ -48,6 +48,7 @@
 					    <th>Name</th>
 					    <th>Address</th>
 							<th>Ratings</th>
+								<th>Area</th>
 					  </tr>
 						<?php
 							include_once("./library.php");// To connect to the database
@@ -69,7 +70,21 @@
 							while($row = mysqli_fetch_assoc($result)) {
 								echo "<tr><td><h3><a href=\"view-restaurant.php?rid={$row["rid"]}\">{$row["name"]}</a></h3></td>";
 								echo "<td><p>{$row["address"]}</p></td>";
-								echo "<td><p>?/5 rating (0 reviews)</p></td></tr>";
+								echo "<td><p>?/5 rating (0 reviews)</p></td>";
+								// get area
+								$sql2="SELECT area_name FROM `isIn` WHERE rid=" . $row["rid"] . "";
+								$result2=mysqli_query($con,$sql2);
+								if (!$result2){
+									echo "Something went wrong when retrieving the results.";
+									die('Error: ' . mysqli_error($con));
+								}
+								if ($result2-> num_rows == 0){
+									echo "<td> </td></tr>";
+								} else {
+									while ($row2 = mysqli_fetch_assoc($result2)) {
+										echo "<td><p>{$row2["area_name"]}</p></td></tr>";
+									}
+								}
 							}
 
 							mysqli_close($con);
