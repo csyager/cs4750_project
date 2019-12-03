@@ -52,6 +52,7 @@
 					  </tr>
 						<?php
 							include_once("./library.php");// To connect to the database
+							echo "username is " . $USERNAME;
 							$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
 							// Check connection

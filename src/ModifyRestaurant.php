@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include_once("./library.php");// To connect to the database
 	$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	$URL="restaurantadded.php";
