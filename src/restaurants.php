@@ -61,15 +61,32 @@
 							// Form the SQL query (an INSERT query)
 							$sql="SELECT name, address, rid FROM `restaurants`";
 							$result=mysqli_query($con,$sql);
+
 							if (!$result){
 								echo "Something went wrong when retrieving the results.";
 								die('Error: ' . mysqli_error($con));
 							}
 
 							while($row = mysqli_fetch_assoc($result)) {
+								$sqlratings="SELECT rid, rating FROM `comment` WHERE rid=" . $row["rid"];
+								$resultratings=mysqli_query($con,$sqlratings);
+								$sum = 0;
+								$count = 0;
+
+								while($rowrating = mysqli_fetch_assoc($resultratings)) {
+									$sum = $sum + intval($rowrating["rating"]);
+									$count = $count + 1;
+								}
+
+								$rating = number_format(($sum / $count),2);
+
 								echo "<tr><td><h3><a href=\"view-restaurant.php?rid={$row["rid"]}\">{$row["name"]}</a></h3></td>";
 								echo "<td><p>{$row["address"]}</p></td>";
-								echo "<td><p>?/5 rating (0 reviews)</p></td></tr>";
+								if ($count == 0) {
+									echo "<td><p>No ratings</p></td></tr>";
+								} else {
+									echo "<td><p>{$rating}/5.00 rating ({$count} reviews)</p></td></tr>";
+								}
 							}
 
 							mysqli_close($con);
