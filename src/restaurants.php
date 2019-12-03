@@ -104,6 +104,7 @@
 										echo "<td><p>{$row2["area_name"]}</p></td></tr>";
 									}
 								}
+							}
 
 							mysqli_close($con);
 						?>
