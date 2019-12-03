@@ -43,6 +43,7 @@
 				<div class="content-wrap item-details">
 					<h2>Regular Deals</h2>
 					<p>These deals do not have a specified deadline and recur frequently.</p>
+					<a href="download.php?type=reg_deal" target="_blank">Download regular deal data</a>
 					<table style="width:100%">
 						<tr>
 					    <th>Item</th>
@@ -80,7 +81,8 @@
 				</div>
         <div class="content-wrap item-details">
           <h2>Temporary Deals</h2>
-          <p>These deals are temporary, claim these before the deadline.</p>
+		  <p>These deals are temporary, claim these before the deadline.</p>
+		  <a href="download.php?type=temp_deal" target="_blank">Download temporary deal data</a>
           <table style="width:100%">
             <tr>
               <th>Item</th>
