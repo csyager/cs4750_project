@@ -58,23 +58,22 @@
 						<h1>Register</h1>
 						<h2>Enter your information below to begin.</h2>
             <form method="POST" action="register.php">
-  						<section>
-  							Username <input type="text" name="username">
-  						</section>
-  						<section>
-  							Password <input type="password" name="password">
-  						</section><br>
-						<section  style="display: none" id="rid_section">
-							RID <input type="text" name="rid">
-						</section><br>
-						<section>
-							User type <select name="user-type" onchange="showRID(this.options[this.selectedIndex].value);">
-								<option value="customer">Customer</option>
-								<option value="owner">Owner</option>
-							</select>
-						</section>
-						
-
+				<section>
+					Username <input type="text" name="username">
+				</section>
+				<section>
+					Password <input type="password" name="password">
+				</section>
+				<section>
+					Account type
+					<select onchange="showRID(this.options[this.selectedIndex].value);">
+						<option value="customer">Customer</option>
+						<option value="owner">Owner</option>
+					</select>
+				</section>
+				<section id="rid_section" style="display: none">
+					RID <input type="text" name="ownerrid">
+				</section>
               <br>
               <section>
                 <button type="submit" name="submit">Submit</button>
@@ -92,10 +91,13 @@
                   // MySQL query
                   $sql = "SELECT username from users WHERE username = '" . $_POST['username'] . "'";
                   $result = $con->query($sql);
+									$sqlowner = "SELECT accname from ownerAccount WHERE username = '" . $_POST['username'] . "'";
+                  $resultowner = $con->query($sql);
+
 									$username = $_POST['username'];
 									$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-                  if ($result-> num_rows == 0){
+                  if (($result-> num_rows == 0) && ($resultowner-> num_rows == 0)){
 										$sql = "INSERT INTO `users` (username, password) VALUES ('$username', '$password')";
 
 										if (!mysqli_query($con,$sql)){

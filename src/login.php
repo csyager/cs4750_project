@@ -67,7 +67,7 @@
                     echo "Error: " . $con->connect_error . "\n";
                   }
                   // MySQL query
-                  $sql = "SELECT username from users WHERE username = '" . $_POST['username'] . "'";
+                  $sql = "SELECT username, password from users WHERE username = '" . $_POST['username'] . "'";
                   $result = $con->query($sql);
 									$username = $_POST["username"];
 									$password = $_POST["password"];
