@@ -18,7 +18,7 @@
 					<a href="index.php">Home</a>
 					<form action="search.php">
 						<input type="text" placeholder="Search..." name="search">
-						<button type="submit">Submit</button>
+						<button type="button">Submit</button>
 					</form>
 					<?php if (isset($_SESSION['valid'])): ?>
 						<div class="topnav-right">
@@ -64,6 +64,10 @@
 						}
 
 						mysqli_close($con);
+					?>
+					<?php
+						echo '<a href="#"><button class="modify-button" type="submit">Modify</button></a>'
+						echo '<a href="#"><button class="delete-button" type="delete">Delete</button></a>'
 					?>
 				</div>
 			</section>
