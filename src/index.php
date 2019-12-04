@@ -53,6 +53,11 @@
 				</div>
 				<div class="menu-box">
 					<h2>
+						<a href="dealform.php" style="display:block;height:100%;width:100%">Submit a deal</a>
+					</h2>
+				</div>
+				<div class="menu-box">
+					<h2>
 						<a href="deals.php" style="display:block;height:100%;width:100%">View Deals</a>
 					</h2>
 				</div>
