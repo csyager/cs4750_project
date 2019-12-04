@@ -42,14 +42,17 @@
 			<section class="restaurant-listing">
 				<div class="content-wrap item-details">
 					<h2>Current Restaurants</h2>
+					<a href="download.php?type=restaurant" target="_blank">Download restaurant data</a>
 					<table style="width:100%">
 						<tr>
 					    <th>Name</th>
 					    <th>Address</th>
 							<th>Ratings</th>
+							<th>Area</th>
 					  </tr>
 						<?php
 							include_once("./library.php");// To connect to the database
+							echo "username is " . $USERNAME;
 							$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 
 							// Check connection
@@ -60,15 +63,48 @@
 							// Form the SQL query (an INSERT query)
 							$sql="SELECT name, address, rid FROM `restaurants`";
 							$result=mysqli_query($con,$sql);
+
 							if (!$result){
 								echo "Something went wrong when retrieving the results.";
 								die('Error: ' . mysqli_error($con));
 							}
 
 							while($row = mysqli_fetch_assoc($result)) {
+								$sqlratings="SELECT rid, rating FROM `comment` WHERE rid=" . $row["rid"];
+								$resultratings=mysqli_query($con,$sqlratings);
+								$sum = 0;
+								$count = 0;
+
+								while($rowrating = mysqli_fetch_assoc($resultratings)) {
+									$sum = $sum + intval($rowrating["rating"]);
+									$count = $count + 1;
+								}
+
+								$rating = number_format(($sum / $count),2);
+
 								echo "<tr><td><h3><a href=\"view-restaurant.php?rid={$row["rid"]}\">{$row["name"]}</a></h3></td>";
+								// address
 								echo "<td><p>{$row["address"]}</p></td>";
-								echo "<td><p>?/5 rating (0 reviews)</p></td></tr>";
+								// rating
+								if ($count == 0) {
+									echo "<td><p>No ratings</p></td>";
+								} else {
+									echo "<td><p>{$rating}/5.00 rating ({$count} reviews)</p></td>";
+								}
+								// get area
+								$sql2="SELECT area_name FROM `isIn` WHERE rid=" . $row["rid"] . "";
+								$result2=mysqli_query($con,$sql2);
+								if (!$result2){
+									echo "Something went wrong when retrieving the results.";
+									die('Error: ' . mysqli_error($con));
+								}
+								if ($result2-> num_rows == 0){
+									echo "<td> </td></tr>";
+								} else {
+									while ($row2 = mysqli_fetch_assoc($result2)) {
+										echo "<td><p>{$row2["area_name"]}</p></td></tr>";
+									}
+								}
 							}
 
 							mysqli_close($con);
