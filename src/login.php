@@ -66,16 +66,14 @@
                     echo "Errno: " . $con->connect_errno . "\n";
                     echo "Error: " . $con->connect_error . "\n";
                   }
-                  // MySQL query
-				  $sql = "SELECT username, password from users WHERE username = '" . $_POST['username'] . "'";
-				  $sql2 = "SELECT accname, password from ownerAccount WHERE accname = '" . $_POST['username'] . "'";
-				  $result = $con->query($sql);
-				  $result2 = $con->query($sql2);
-				  $username = $_POST["username"];
-				  $password = $_POST["password"];
-                  if ($result-> num_rows == 0 && $result2->num_rows == 0){
-                    echo "<section>Incorrect username or password</section>";
-				  } else {
+				  // look thru owners
+				  $sql = "SELECT accname, password from ownerAccount WHERE accname = '" . $_POST['username'] . "'";
+                  $result = $con->query($sql);
+									$username = $_POST["username"];
+									$password = $_POST["password"];
+                  if ($result-> num_rows == 0){
+                    echo "<section> </section>";
+                  } else {
 					  //echo "<section>username found, now checking...</section>";
 					while($row = $result->fetch_assoc()) {
 						$db_password = $row['password'];
@@ -90,20 +88,27 @@
 								echo "<section>Incorrect password</section>";
 							}
 					}
-					// this should work as long as there aren't identical accounts in the two tables
-					while($row = $result2->fetch_assoc()) {
-						$db_password = $row['password'];
-						//echo "<section>entered password: " . $password .  "...</section>";
-						//echo "<section>hashed password: " . $db_password .  "...</section>";
-							if (password_verify($password, $db_password)) {
-								echo "<section>correct password</section>";
-								$_SESSION['username'] = $_POST['username'];
-								$_SESSION['valid'] = true;
-								header("Location: index.php");
-							} else {
-								echo "<section>Incorrect password</section>";
-							}
-					}
+                  }
+                  // look thru users
+                  $sql2 = "SELECT username, password from users WHERE username = '" . $_POST['username'] . "'";
+                  $result2 = $con->query($sql2);
+                  if ($result2-> num_rows == 0){
+                    echo "<section>Incorrect username or password</section>";
+                  } else {
+					  //echo "<section>username found, now checking...</section>";
+										while($row2 = $result2->fetch_assoc()) {
+											$db_password = $row2['password'];
+											//echo "<section>entered password: " . $password .  "...</section>";
+											//echo "<section>hashed password: " . $db_password .  "...</section>";
+												if (password_verify($password, $db_password)) {
+													echo "<section>correct password</section>";
+													$_SESSION['username'] = $_POST['username'];
+													$_SESSION['valid'] = true;
+													header("Location: index.php");
+												} else {
+													echo "<section>Incorrect password</section>";
+												}
+										}
                   }
                 }
             	?>
