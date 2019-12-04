@@ -83,6 +83,7 @@
 								echo "<section>correct password</section>";
 								$_SESSION['username'] = $_POST['username'];
 								$_SESSION['valid'] = true;
+								$_SESSION['owner'] = true;
 								header("Location: index.php");
 							} else {
 								echo "<section>Incorrect password</section>";
@@ -104,6 +105,7 @@
 													echo "<section>correct password</section>";
 													$_SESSION['username'] = $_POST['username'];
 													$_SESSION['valid'] = true;
+													$_SESSION['owner'] = false;
 													header("Location: index.php");
 												} else {
 													echo "<section>Incorrect password</section>";
