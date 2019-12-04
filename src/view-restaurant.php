@@ -67,7 +67,6 @@
 							$count = $count + 1;
 						}
 
-						$rating = number_format(($sum / $count),2);
 
 						while($row = mysqli_fetch_assoc($result)) {
 							echo "<h2>{$row["name"]}</h2>";
@@ -75,6 +74,7 @@
 							if ($count == 0) {
 								echo "<p>No ratings</p>";
 							} else {
+								$rating = number_format(($sum / $count),2);
 								echo "<p>{$rating}/5.00 rating ({$count} reviews)</p>";
 							}
 							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
@@ -83,8 +83,12 @@
 						mysqli_close($con);
 					?>
 					<?php
-						include_once("./library.php");
+						include_once("./library.php");// To connect to the database
 						$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+						// Check connection
+						if (mysqli_connect_errno()){
+							echo "Failed to connect to MySQL: " . mysqli_connect_error();
+						}
 						$rid = $_GET['rid'];
 						$username = $_SESSION['username'];
 						$sql = "SELECT accname FROM `ownedBy` WHERE rid = '" . $rid . "' AND accname = '". $username . "'";
@@ -104,7 +108,12 @@
 							<th>Cost</th>
 						</tr>
 						<?php
-							// get list of menu items
+							include_once("./library.php");// To connect to the database
+							$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+							// Check connection
+							if (mysqli_connect_errno()){
+								echo "Failed to connect to MySQL: " . mysqli_connect_error();
+							}
 							$sql2="SELECT item_name, description, cost FROM `menuItem` WHERE rid=" . $_GET["rid"];
 							$result2=mysqli_query($con,$sql2);
 							if (!$result2){
