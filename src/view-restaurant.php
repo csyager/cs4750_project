@@ -80,6 +80,21 @@
 							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
 							// echo "<a href="#"><button class="delete-button" type="delete">Delete</button></a>";
 						}
+						mysqli_close($con);
+					?>
+					<?php
+						include_once("./library.php");
+						$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
+						$rid = $_GET['rid'];
+						$username = $_SESSION['username'];
+						$sql = "SELECT accname FROM `ownedBy` WHERE rid = '" . $rid . "' AND accname = '". $username . "'";
+						$result = $con->query($sql);
+						if ($result->num_rows != 0){
+							echo '<a href="#"><button class="modify-button" type="submit">Modify</button></a>';
+							echo '<a href="#"><button class="delete-button" type="delete">Delete</button></a>';
+						}
+						mysqli_close($con);
+
 					?>
 
 					<table style=\"width:100%\">
