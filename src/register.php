@@ -66,7 +66,7 @@
 				</section>
 				<section>
 					Account type
-					<select onchange="showRID(this.options[this.selectedIndex].value);">
+					<select name="user_type" onchange="showRID(this.options[this.selectedIndex].value);">
 						<option value="customer">Customer</option>
 						<option value="owner">Owner</option>
 					</select>
@@ -88,25 +88,42 @@
                     echo "Errno: " . $con->connect_errno . "\n";
                     echo "Error: " . $con->connect_error . "\n";
                   }
-                  // MySQL query
-                  $sql = "SELECT username from users WHERE username = '" . $_POST['username'] . "'";
-                  $result = $con->query($sql);
-									$sqlowner = "SELECT accname from ownerAccount WHERE username = '" . $_POST['username'] . "'";
-                  $resultowner = $con->query($sql);
+				  // MySQL query
+				  
+				  if ($_POST['user_type'] == 'customer'){
+					  $username = $_POST['username'];
+					  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+					  $sql = "SELECT username from users WHERE username = '" . $username . "'";
+					  $result = $con->query($sql);
+					  
+					  if ($result-> num_rows == 0){
+						  $sql = "INSERT INTO `users` (username, password) VALUES ('$username', '$password')";
+						  if (!mysqli_query($con,$sql)){
+							die('Error: ' . mysqli_error($con));
+						  }
+					  } else {
+						  echo "<section>Username already exists.  Please choose a unique username</section>";
+					  }
+				  } else if ($_POST['user_type'] == 'owner'){
+					  $accname = $_POST['username'];
+					  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+					  $sql = "SELECT accname from ownerAccount WHERE accname = '" . $accname . "'";
+					  $result = $con->query($sql);
 
-									$username = $_POST['username'];
-									$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-                  if (($result-> num_rows == 0) && ($resultowner-> num_rows == 0)){
-										$sql = "INSERT INTO `users` (username, password) VALUES ('$username', '$password')";
-
-										if (!mysqli_query($con,$sql)){
-											die('Error: ' . mysqli_error($con));
-										}
-                    header("Location: registersuccess.php");
-                  } else {
-                    echo "<section>Username already exists. Please choose a unique username.</section>";
-                  }
+					  if ($result->num_rows == 0){
+						  $rid = $_POST['ownerrid'];
+						  $sql = "INSERT INTO `ownerAccount` (accname, password) VALUES ('$accname', '$password')";
+						  if (!mysqli_query($con,$sql)){
+							die('Error: ' . mysqli_error($con));
+						  }
+						  $sql = "INSERT INTO `ownedBy` (accname, rid) VALUES ('$accname', '$rid')";
+						  if (!mysqli_query($con,$sql)){
+							die('Error: ' . mysqli_error($con));
+						  }
+					  } else {
+						  echo "<section>Username already exists.  Please choose a unique username</section>";
+					  }
+				  }
                 }
             	?>
             </form>
