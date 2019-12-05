@@ -108,18 +108,12 @@
 							<th>Cost</th>
 						</tr>
 						<?php
-<<<<<<< HEAD
-							// get list of menu items
-							include_once("./library.php");
-							$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-=======
 							include_once("./library.php");// To connect to the database
 							$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 							// Check connection
 							if (mysqli_connect_errno()){
 								echo "Failed to connect to MySQL: " . mysqli_connect_error();
 							}
->>>>>>> 44e9b8d5e2305efcbe44399b30218feb59daf3f7
 							$sql2="SELECT item_name, description, cost FROM `menuItem` WHERE rid=" . $_GET["rid"];
 							$result2=mysqli_query($con,$sql2);
 							if (!$result2){
