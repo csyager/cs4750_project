@@ -95,7 +95,6 @@
 						$result = $con->query($sql);
 						if ($result->num_rows != 0){
 							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>&nbsp;&nbsp;';
-							echo '<a href="#"><button class="delete-button" type="delete">Delete</button></a>';
 						}
 						mysqli_close($con);
 
