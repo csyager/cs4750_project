@@ -28,7 +28,7 @@
 	SET address ="' . $_POST[address] . '", name = "' . $_POST[name] . '"
 	WHERE rid ="' . $_GET['rid'] . '"';
 
-	echo $sql;
+	// echo $sql;
 
 	if (!mysqli_query($con,$sql)){
 		die('Error: ' . mysqli_error($con));
