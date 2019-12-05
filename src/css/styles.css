@@ -181,6 +181,19 @@ input[type=password] {
   background: #f2cf1f;
 }
 
+.delete-button {
+  padding: 6px;
+  margin: 12px 0px;
+  width: 120px;
+  height: 50px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background: red;
+}
+
 /* Bottom Bar background: #2F3061;
 ------------------------------------*/
 .page-container {
