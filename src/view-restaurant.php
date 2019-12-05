@@ -77,7 +77,7 @@
 							} else {
 								echo "<p>{$rating}/5.00 rating ({$count} reviews)</p>";
 							}
-							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
+							// echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>';
 							// echo "<a href="#"><button class="delete-button" type="delete">Delete</button></a>";
 						}
 						mysqli_close($con);
@@ -90,7 +90,7 @@
 						$sql = "SELECT accname FROM `ownedBy` WHERE rid = '" . $rid . "' AND accname = '". $username . "'";
 						$result = $con->query($sql);
 						if ($result->num_rows != 0){
-							echo '<a href="#"><button class="modify-button" type="submit">Modify</button></a>';
+							echo '<a href="restaurantmodify.php?rid=' . $_GET["rid"] . '"><button class="modify-button" type="submit">Modify</button></a>&nbsp;&nbsp;';
 							echo '<a href="#"><button class="delete-button" type="delete">Delete</button></a>';
 						}
 						mysqli_close($con);
@@ -105,6 +105,8 @@
 						</tr>
 						<?php
 							// get list of menu items
+							include_once("./library.php");
+							$con = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 							$sql2="SELECT item_name, description, cost FROM `menuItem` WHERE rid=" . $_GET["rid"];
 							$result2=mysqli_query($con,$sql2);
 							if (!$result2){

@@ -1,10 +1,10 @@
 <?php
 	session_start();
 
-	if( isset( $_SESSION['valid'] ) ) {
-		header("Location: profile.php");
-	} else {
-	}
+	// if( isset( $_SESSION['valid'] ) ) {
+	// 	header("Location: profile.php");
+	// } else {
+	// }
 ?>
 
 <script>
@@ -100,6 +100,11 @@
 						  $sql = "INSERT INTO `users` (username, password) VALUES ('$username', '$password')";
 						  if (!mysqli_query($con,$sql)){
 							die('Error: ' . mysqli_error($con));
+						  } else {
+							  // if no error, log in
+							  $_SESSION['username'] = $username;
+							  $_SESSION['valid'] = true;
+							  header("Location: index.php");
 						  }
 					  } else {
 						  echo "<section>Username already exists.  Please choose a unique username</section>";
@@ -114,12 +119,20 @@
 						  $rid = $_POST['ownerrid'];
 						  $sql = "INSERT INTO `ownerAccount` (accname, password) VALUES ('$accname', '$password')";
 						  if (!mysqli_query($con,$sql)){
+							echo "<p>Insert into owner account</p>";
 							die('Error: ' . mysqli_error($con));
 						  }
-						  $sql = "INSERT INTO `ownedBy` (accname, rid) VALUES ('$accname', '$rid')";
+						  $sql = "INSERT INTO `ownedBy`(accname, rid) VALUES ('$accname', '$rid')";
 						  if (!mysqli_query($con,$sql)){
-							die('Error: ' . mysqli_error($con));
-						  }
+							echo "<p>insert into ownedBy</p>";
+							die('Error: ' . mysqli_error($con));		
+						  } else {
+							// if no error, log in
+							$_SESSION['username'] = $accname;
+							$_SESSION['valid'] = true;
+							header("Location: index.php");
+						}
+
 					  } else {
 						  echo "<section>Username already exists.  Please choose a unique username</section>";
 					  }
